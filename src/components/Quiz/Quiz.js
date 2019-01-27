@@ -17,22 +17,27 @@ class Quiz extends Component {
       timer: this.timerTime
     };
 
+    // Fetch a new question
     this.props.dispatch(QuizStoreActions.getRandomQuiz(this.props.quizIds));
+
     this.timer = setInterval(() => {
       let newTimer = this.state.timer;
       newTimer--;
       this.setState({...this.state, timer: newTimer});
       if (newTimer < 1) {
+        // Time Up
         this.youLose('Time Up - Game Over');
       }
     }, 1000);
   }
 
   componentWillUnmount() {
+    // Clear the timer when component distroyed
     clearInterval(this.timer);
   }
 
   handleChange = (event) => {
+    // Update the answer in the state when changed
     this.setState({answer: event.target.value});
   }
 
@@ -40,21 +45,27 @@ class Quiz extends Component {
     event.preventDefault();
     if (this.state.answer.toLowerCase()
         === this.props.quiz.answer.toLowerCase()) {
+      // Correct Answer
       this.setState({answer: '', timer: this.timerTime});
       this.props.dispatch(AppStoreActions.correctAnswer());
+      // Check if we didn't reach the last round and we are still playing
       if (this.props.playing) {
+        // Fetch a new question
         this.props.dispatch(QuizStoreActions.getRandomQuiz(this.props.quizIds));
       }
     } else {
+      // Wrong Answer
       this.youLose('Wrong - Game Over');
     }
   }
 
+  // Game Over - Support differnt messages
   youLose = (message) => {
     this.setState({answer: '', timer: this.timerTime});
     this.props.dispatch(AppStoreActions.reset(message));
   }
 
+  // Fill in the right answer
   fillAnswer = (answer) => {
     this.setState({...this.state, answer: answer});
   }

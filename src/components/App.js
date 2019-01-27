@@ -16,6 +16,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // Check if we completed the final round
     if (this.props.round > this.maxRounds) {
       this.props.dispatch(AppStoreActions.reset('You Won!!!'));
     }

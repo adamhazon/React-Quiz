@@ -4,6 +4,7 @@
   align-items: center;
   height: 48px;
   background-color: #FF6D00;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
 }
 
 .status-col {
