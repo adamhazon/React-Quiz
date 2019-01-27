@@ -14,15 +14,15 @@ const StatusBar = (props) => {
       </span>
       <span className="status-col">
         <span className="status-row">Points: </span>
-        <span className="status-row">{points}</span>
+        <span className="status-row">{points.toLocaleString()}</span>
       </span>
       <span className="status-col">
         <span className="status-row">Score: </span>
-        <span className="status-row">{score}</span>
+        <span className="status-row">{score.toLocaleString()}</span>
       </span>
       <span className="status-col">
         <span className="status-row">High Score: </span>
-        <span className="status-row">{highScore}</span>
+        <span className="status-row">{highScore.toLocaleString()}</span>
       </span>
     </div>
   );

@@ -41,7 +41,7 @@ class App extends Component {
           }
           {this.props.playing && <Quiz playing={this.props.playing} />}
           {!this.props.playing &&
-            <div className="start-button" onClick={() => this.startGame()}>
+            <div className="button" onClick={() => this.startGame()}>
               Start
             </div>
           }

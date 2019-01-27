@@ -84,9 +84,9 @@ class Quiz extends Component {
           <textarea className="answer-input" value={this.state.answer}
             onChange={this.handleChange} />
           <div className="buttons">
-            <input className="hint-button" type="button" value="Hint"
+            <input className="button hint-button" type="button" value="Hint"
               onClick={() => this.fillAnswer(quiz.answer)}/>
-            <input className="submit-button" type="submit" value="Submit" />
+            <input className="button" type="submit" value="Submit" />
           </div>
         </form>
         <div className="timer">{this.state.timer} seconds left to answer</div>
