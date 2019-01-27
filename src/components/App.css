@@ -1,14 +1,43 @@
-.App {
+.app {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  height: 100%;
 }
 
-.App-header {
+.app-header {
+  flex: 0 0 auto;
   background-color: #282c34;
-  min-height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.canvas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 80px 16px 16px;
+}
+
+.start-button {
+  background-color: #FFD600;
+  width: 120px;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 36px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+
+@media (max-width: 320px) {
+  .canvas {
+    padding-top: 16px;
+  }
 }

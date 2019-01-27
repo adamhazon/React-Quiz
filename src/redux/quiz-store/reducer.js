@@ -12,6 +12,7 @@ export const reducer = (state = initialState, action) => {
     case ActionTypes.LOAD_REQUEST:
       return {
         ...state,
+        quiz: {},
         isLoading: true
       }
     case ActionTypes.LOAD_SUCCESS:
