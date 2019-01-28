@@ -17,14 +17,13 @@ export const reducer = (state = initialState, action) => {
       const newScore = score + points;
 
       return {
+        ...state,
         round: round + 1,
         points: points * 2,
         score: newScore,
         highScore: newScore > highScore ?
                    newScore :
                    highScore,
-        playing: true,
-        message: null
       }
     case ActionTypes.RESET:
       return {

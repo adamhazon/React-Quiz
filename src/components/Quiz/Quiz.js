@@ -12,7 +12,7 @@ class Quiz extends Component {
   constructor(props) {
     super(props);
 
-    this.timerTime = 300;
+    this.timerTime = 30;
 
     this.state = {
       answer: '',
