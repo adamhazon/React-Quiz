@@ -6,7 +6,8 @@ const initialState = {
   score: 0,
   highScore: 0,
   playing: false,
-  message: 'Welcome'
+  message: 'Welcome',
+  hints: 5
 };
 
 export const reducer = (state = initialState, action) => {
@@ -29,7 +30,8 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         playing: false,
-        message: action.payload
+        message: action.payload,
+        hints: initialState.hints
       };
     case ActionTypes.START:
       return {
@@ -37,6 +39,11 @@ export const reducer = (state = initialState, action) => {
         highScore: state.highScore,
         playing: true,
         message: null
+      };
+    case ActionTypes.REMOVE_HINT:
+      return {
+        ...state,
+        hints: state.hints > 0 ? state.hints - 1 : 0
       };
     default:
       return state;
