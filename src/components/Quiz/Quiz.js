@@ -5,16 +5,19 @@ import './quiz.css';
 
 import { AppStoreActions } from '../../redux/app-store';
 import { QuizStoreActions } from '../../redux/quiz-store';
+import HintModal from './hint-modal/hint-modal';
 
 class Quiz extends Component {
+
   constructor(props) {
     super(props);
 
-    this.timerTime = 30;
+    this.timerTime = 300;
 
     this.state = {
       answer: '',
-      timer: this.timerTime
+      timer: this.timerTime,
+      showHint: false
     };
 
     // Fetch a new question
@@ -66,8 +69,17 @@ class Quiz extends Component {
   }
 
   // Fill in the right answer
-  fillAnswer = (answer) => {
-    this.setState({...this.state, answer: answer});
+  fillAnswer = () => {
+    this.setState({
+      ...this.state,
+      answer: this.props.quiz.answer,
+      showHint: false
+    });
+  }
+
+  // Handle Hint Modal
+  showHint = (show) => {
+    this.setState({...this.state, showHint: show});
   }
 
   render() {
@@ -75,22 +87,25 @@ class Quiz extends Component {
 
     return (
       quiz.category ?
-      <div className="quiz-card">
-        <div className="quiz-category">Category: {quiz.category.title}</div>
-        <label className="label">Question:</label>
-        <h4 className="quiz-question">{quiz.question}</h4>
-        <label className="label">Answer:</label>
-        <form className="answer-form" onSubmit={this.handleSubmit}>
-          <textarea className="answer-input" value={this.state.answer}
-            onChange={this.handleChange} />
-          <div className="buttons">
-            <input className="button hint-button" type="button" value="Hint"
-              onClick={() => this.fillAnswer(quiz.answer)}/>
-            <input className="button" type="submit" value="Submit" />
-          </div>
-        </form>
-        <div className="timer">{this.state.timer} seconds left to answer</div>
-      </div>
+        <div className="quiz-card">
+          <div className="quiz-category">Category: {quiz.category.title}</div>
+          <label className="label">Question:</label>
+          <h4 className="quiz-question">{quiz.question}</h4>
+          <label className="label">Answer:</label>
+          <form className="answer-form" onSubmit={this.handleSubmit}>
+            <textarea className="answer-input" value={this.state.answer}
+              onChange={this.handleChange} />
+            <div className="buttons">
+              <input className="button hint-button" type="button" value="Hint"
+                onClick={() => this.showHint(true)} />
+              <input className="button" type="submit" value="Submit" />
+            </div>
+          </form>
+          <div className="timer">{this.state.timer} seconds left to answer</div>
+          {this.state.showHint &&
+            <HintModal showHint={this.showHint} fillAnswer={this.fillAnswer} />
+          }
+        </div>
       : null
     );
   }
